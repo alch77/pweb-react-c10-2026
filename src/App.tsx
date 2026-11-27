@@ -14,6 +14,8 @@ import { Pipeline } from './components/Pipeline';
 import { ApplicationDetail } from './components/ApplicationDetail';
 import { OfferComparator } from './components/OfferComparator';
 import { UndoToast } from './components/UndoToast';
+import { ThemeToggle } from './components/ThemeToggle';
+import { BackupPanel } from './components/BackupPanel';
 
 type Tab = 'explore' | 'pipeline' | 'compare';
 
@@ -48,6 +50,7 @@ export default function App() {
           <button className={tab === 'pipeline' ? 'on' : ''} onClick={() => setTab('pipeline')}>Pipeline Lamaran ({applications.length})</button>
           <button className={tab === 'compare' ? 'on' : ''} onClick={() => setTab('compare')}>Bandingkan Offer ({offerCount})</button>
         </nav>
+        <div className="tools"><ThemeToggle /><BackupPanel applications={applications} skills={skills} /></div>
         <button className="btn primary" onClick={() => setShowForm(true)}>+ Catat Lamaran</button>
       </header>
 

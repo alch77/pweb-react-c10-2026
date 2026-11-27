@@ -1,0 +1,31 @@
+/* Tambahan: toolbar header + Dark Mode. Tidak mengubah index.css. */
+.tools { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.tools .btn { padding: 6px 10px; font-size: 13px; }
+.backup-err { background: #fee2e2; color: #991b1b; padding: 4px 8px; border-radius: 6px; margin: 0; }
+
+[data-theme='dark'] { color-scheme: dark; }
+:root[data-theme='dark'] { color: #e2e8f0; background: #0b1120; --blue: #3b82f6; }
+[data-theme='dark'] input, [data-theme='dark'] select { background: #1e293b; color: #e2e8f0; border-color: #475569; }
+[data-theme='dark'] .card, [data-theme='dark'] .modal, [data-theme='dark'] .state { background: #111827; border-color: #334155; }
+[data-theme='dark'] .btn { background: #1e293b; color: #e2e8f0; border-color: #475569; }
+[data-theme='dark'] .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+[data-theme='dark'] .btn.danger { color: #fca5a5; border-color: #7f1d1d; }
+[data-theme='dark'] .pill { background: #334155; color: #e2e8f0; }
+[data-theme='dark'] .pill.green { background: #14532d; color: #bbf7d0; }
+[data-theme='dark'] .pill.yellow { background: #713f12; color: #fef08a; }
+[data-theme='dark'] .pill.red { background: #7f1d1d; color: #fecaca; }
+[data-theme='dark'] .tag { background: #1e293b; border-color: #475569; }
+[data-theme='dark'] .tag.ok { background: #14532d; border-color: #166534; }
+[data-theme='dark'] .tag.miss { background: #7f1d1d; border-color: #991b1b; }
+[data-theme='dark'] .stages span { background: #334155; }
+[data-theme='dark'] .stages .on { background: var(--blue); }
+[data-theme='dark'] .bar { background: #334155; }
+[data-theme='dark'] .total { background: #1e3a8a; }
+[data-theme='dark'] .done { color: #64748b; }
+[data-theme='dark'] .x { color: #94a3b8; }
+[data-theme='dark'] .banner, [data-theme='dark'] .backup-err { background: #450a0a; color: #fecaca; }
+[data-theme='dark'] .err { color: #fca5a5; }
+[data-theme='dark'] .errbox { border-color: #991b1b; }
+[data-theme='dark'] .timer.zero { color: #f87171; }
+[data-theme='dark'] .toast { background: #e2e8f0; color: #0f172a; }
+[data-theme='dark'] .link { color: #1d4ed8; }
