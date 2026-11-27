@@ -4,10 +4,10 @@ import { useLocalStorage } from './useLocalStorage';
 export type Theme = 'light' | 'dark';
 
 // Tema disimpan lewat useLocalStorage, lalu dipasang ke <html data-theme="...">
-// supaya CSS (src/extras.css) bisa menimpa warna tanpa menyentuh index.css.
+// Default NOVA Mission Control adalah 'dark', dan pengguna dapat beralih ke 'light'.
 export function useTheme(): [Theme, () => void] {
-  const [stored, setStored] = useLocalStorage<Theme>('amm:theme', 'light');
-  const theme: Theme = stored === 'dark' ? 'dark' : 'light'; // nilai rusak di storage -> light
+  const [stored, setStored] = useLocalStorage<Theme>('amm:theme', 'dark');
+  const theme: Theme = stored === 'light' ? 'light' : 'dark';
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;

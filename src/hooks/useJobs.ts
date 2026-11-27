@@ -3,28 +3,50 @@ import type { JobListing } from '../types';
 import { fetchJobs } from '../services/jobService';
 import type { JobSource } from '../services/jobService';
 
+interface JobsState {
+  jobs: JobListing[];
+  loading: boolean;
+  error: string | null;
+  key: string;
+}
+
 export function useJobs(source: JobSource) {
-  const [jobs, setJobs] = useState<JobListing[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
+  const requestKey = `${source}:${attempt}`;
+  const [state, setState] = useState<JobsState>({
+    jobs: [],
+    loading: true,
+    error: null,
+    key: requestKey,
+  });
 
   useEffect(() => {
     const controller = new AbortController();
-    setLoading(true);
-    setError(null);
     fetchJobs(source, controller.signal)
-      .then((data) => setJobs(data))
+      .then((data) => {
+        if (!controller.signal.aborted) {
+          setState({ jobs: data, loading: false, error: null, key: requestKey });
+        }
+      })
       .catch((e: unknown) => {
         if (e instanceof DOMException && e.name === 'AbortError') return;
-        setJobs([]);
-        setError(e instanceof TypeError ? 'Gagal terhubung ke server (cek koneksi internet).' : e instanceof Error ? e.message : 'Terjadi kesalahan.');
-      })
-      .finally(() => {
-        if (!controller.signal.aborted) setLoading(false);
+        const msg =
+          e instanceof TypeError
+            ? 'Gagal terhubung ke server (cek koneksi internet).'
+            : e instanceof Error
+              ? e.message
+              : 'Terjadi kesalahan.';
+        setState({ jobs: [], loading: false, error: msg, key: requestKey });
       });
     return () => controller.abort();
-  }, [source, attempt]);
+  }, [source, requestKey]);
 
-  return { jobs, loading, error, retry: () => setAttempt((n) => n + 1) };
+  const loading = state.loading || state.key !== requestKey;
+
+  return {
+    jobs: state.key === requestKey ? state.jobs : [],
+    loading,
+    error: state.key === requestKey ? state.error : null,
+    retry: () => setAttempt((n) => n + 1),
+  };
 }

@@ -1,31 +1,108 @@
-/* Tambahan: toolbar header + Dark Mode. Tidak mengubah index.css. */
-.tools { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-.tools .btn { padding: 6px 10px; font-size: 13px; }
-.backup-err { background: #fee2e2; color: #991b1b; padding: 4px 8px; border-radius: 6px; margin: 0; }
+/* Bonus utilities: header tools & NOVA Daylight Light Theme */
+.tools {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
 
-[data-theme='dark'] { color-scheme: dark; }
-:root[data-theme='dark'] { color: #e2e8f0; background: #0b1120; --blue: #3b82f6; }
-[data-theme='dark'] input, [data-theme='dark'] select { background: #1e293b; color: #e2e8f0; border-color: #475569; }
-[data-theme='dark'] .card, [data-theme='dark'] .modal, [data-theme='dark'] .state { background: #111827; border-color: #334155; }
-[data-theme='dark'] .btn { background: #1e293b; color: #e2e8f0; border-color: #475569; }
-[data-theme='dark'] .btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
-[data-theme='dark'] .btn.danger { color: #fca5a5; border-color: #7f1d1d; }
-[data-theme='dark'] .pill { background: #334155; color: #e2e8f0; }
-[data-theme='dark'] .pill.green { background: #14532d; color: #bbf7d0; }
-[data-theme='dark'] .pill.yellow { background: #713f12; color: #fef08a; }
-[data-theme='dark'] .pill.red { background: #7f1d1d; color: #fecaca; }
-[data-theme='dark'] .tag { background: #1e293b; border-color: #475569; }
-[data-theme='dark'] .tag.ok { background: #14532d; border-color: #166534; }
-[data-theme='dark'] .tag.miss { background: #7f1d1d; border-color: #991b1b; }
-[data-theme='dark'] .stages span { background: #334155; }
-[data-theme='dark'] .stages .on { background: var(--blue); }
-[data-theme='dark'] .bar { background: #334155; }
-[data-theme='dark'] .total { background: #1e3a8a; }
-[data-theme='dark'] .done { color: #64748b; }
-[data-theme='dark'] .x { color: #94a3b8; }
-[data-theme='dark'] .banner, [data-theme='dark'] .backup-err { background: #450a0a; color: #fecaca; }
-[data-theme='dark'] .err { color: #fca5a5; }
-[data-theme='dark'] .errbox { border-color: #991b1b; }
-[data-theme='dark'] .timer.zero { color: #f87171; }
-[data-theme='dark'] .toast { background: #e2e8f0; color: #0f172a; }
-[data-theme='dark'] .link { color: #1d4ed8; }
+.backup-err {
+  background: rgba(248, 113, 113, 0.16);
+  border: 1px solid rgba(248, 113, 113, 0.42);
+  color: #fecaca;
+  padding: 4px 10px;
+  border-radius: var(--radius-xs);
+  margin: 0;
+  font-size: 12px;
+}
+
+@media (max-width: 1024px) {
+  .nova-header .tools {
+    display: none;
+  }
+}
+
+/* NOVA Daylight Light Theme (when user toggles ThemeToggle) */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --hero-planet-img: url('/nova-planet-light.jpg');
+  --bg-void: #f4f6f9;
+  --bg-deep: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.9);
+  --bg-elevated: #eef2f6;
+
+  --accent-sage: #15803d;
+  --accent-sage-strong: #166534;
+  --accent-sage-dim: rgba(21, 128, 61, 0.1);
+  --accent-sage-border: rgba(21, 128, 61, 0.34);
+  --accent-signal: #0369a1;
+  --accent-signal-dim: rgba(3, 105, 161, 0.1);
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #475569;
+
+  --border-hairline: rgba(15, 23, 42, 0.1);
+  --border-panel: rgba(15, 23, 42, 0.16);
+  --border-strong: rgba(15, 23, 42, 0.28);
+  --specular-top: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+:root[data-theme='light'] .nova-header {
+  background: rgba(244, 246, 249, 0.88);
+}
+
+:root[data-theme='light'] .nova-nav-pill,
+:root[data-theme='light'] .nova-icon-btn,
+:root[data-theme='light'] .nova-captain-chip,
+:root[data-theme='light'] .btn {
+  background: #ffffff;
+}
+
+:root[data-theme='light'] .nova-nav-btn.on {
+  background: #e2e8f0;
+  border-color: rgba(15, 23, 42, 0.16);
+}
+
+:root[data-theme='light'] .btn.primary {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #f8fafc;
+}
+
+:root[data-theme='light'] .nova-backdrop {
+  opacity: 0.96;
+  background-position: 62% 28%;
+}
+
+:root[data-theme='light'] .nova-backdrop::after {
+  background:
+    linear-gradient(90deg, #f4f6f9 0%, rgba(244, 246, 249, 0.88) 32%, rgba(244, 246, 249, 0) 56%, rgba(244, 246, 249, 0.65) 100%),
+    linear-gradient(180deg, rgba(244, 246, 249, 0.35) 0%, rgba(244, 246, 249, 0) 32%, rgba(244, 246, 249, 0.85) 86%, #f4f6f9 100%);
+}
+
+:root[data-theme='light'] .status-chip,
+:root[data-theme='light'] .nova-target-tag {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+:root[data-theme='light'] .bar {
+  background: rgba(15, 23, 42, 0.1);
+}
+
+:root[data-theme='light'] .badge.st-WISHLIST { color: #334155; }
+:root[data-theme='light'] .badge.st-APPLIED { color: #1d4ed8; }
+:root[data-theme='light'] .badge.st-SCREENING { color: #6d28d9; }
+:root[data-theme='light'] .badge.st-INTERVIEW { color: #0369a1; }
+:root[data-theme='light'] .badge.st-OFFER { color: #15803d; }
+:root[data-theme='light'] .badge.st-REJECTED { color: #b91c1c; }
+:root[data-theme='light'] .badge.st-GHOSTED { color: #c2410c; }
+:root[data-theme='light'] .tag.miss { color: #c2410c; }
+:root[data-theme='light'] .banner,
+:root[data-theme='light'] .backup-err {
+  background: #fee2e2;
+  color: #991b1b;
+}
+:root[data-theme='light'] .err {
+  color: #b91c1c;
+}
